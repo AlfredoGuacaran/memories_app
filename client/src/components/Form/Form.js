@@ -33,9 +33,17 @@ export default function Form({ currentId, setCurrentId }) {
     } else {
       dispatch(createPost(postData));
     }
+    clear();
   };
   const clear = () => {
-    console.log('clear');
+    setCurrentId(null);
+    setPostData({
+      creator: '',
+      title: '',
+      message: '',
+      tags: '',
+      selectedFile: '',
+    });
   };
 
   return (
@@ -106,7 +114,6 @@ export default function Form({ currentId, setCurrentId }) {
           variant='contained'
           color='secondary'
           size='small'
-          type='submit'
           onClick={clear}
           fullWidth
         >
