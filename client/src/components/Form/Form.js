@@ -71,7 +71,7 @@ export default function Form() {
             type='file'
             multiple={false}
             onDone={({ base64 }) =>
-              setPostData({ ...postData, selectecFile: base64 })
+              setPostData({ ...postData, selectedFile: base64 })
             }
           />
         </div>
