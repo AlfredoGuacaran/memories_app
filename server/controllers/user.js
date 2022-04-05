@@ -1,8 +1,8 @@
-import bcryp from 'bcryptjs';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import User from '../models/user';
+import User from '../models/user.js';
 
-export const singIn = async (req, res) => {
+export const signin = async (req, res) => {
   try {
     const { email, password } = req.body;
     const existingUser = await User.findOne({ email });
@@ -28,7 +28,7 @@ export const singIn = async (req, res) => {
   }
 };
 
-export const singUp = async (req, res) => {
+export const signup = async (req, res) => {
   try {
     const { email, password, passwordConfirm, firstName, lastName } = req.body;
 
