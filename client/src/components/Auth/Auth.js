@@ -14,16 +14,36 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Input from './Input';
 import Icon from './Icon';
 import { useDispatch } from 'react-redux';
+import { signIn, signUp } from '../../actions/auth';
 
 const Auth = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const inicialState = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    passwordConfirm: '',
+  };
+
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
-  const handleSubmit = () => {};
-  const handleChange = () => {};
+  const [formData, setFormData] = useState(inicialState);
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    if (isSignup) {
+      dispatch(signUp(formData, navigate));
+    } else {
+      dispatch(signIn(formData, navigate));
+    }
+  };
+  const handleChange = e => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -55,7 +75,7 @@ const Auth = () => {
         </Avatar>
         <Typography variant='h5'>{isSignup ? 'Sign Up' : 'Sign In'}</Typography>
 
-        <form className={classes.form} onSubmit={() => handleSubmit}>
+        <form className={classes.form} onSubmit={event => handleSubmit(event)}>
           <Grid container spacing={2}>
             {isSignup && (
               <>
@@ -89,7 +109,7 @@ const Auth = () => {
             />
             {isSignup && (
               <Input
-                name='password'
+                name='passwordConfirm'
                 label='Confirm Password'
                 handleChange={handleChange}
                 type={showPassword ? 'text' : 'password'}
