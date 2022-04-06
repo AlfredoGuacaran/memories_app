@@ -55,7 +55,6 @@ const Auth = () => {
   const googleSuccess = async response => {
     const result = response?.profileObj;
     const token = response?.tokenId;
-    console.log(result, token);
     try {
       dispatch({ type: 'AUTH', payload: { result, token } });
       navigate('/');
