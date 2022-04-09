@@ -25,9 +25,7 @@ mongoose
     useNewUrlParser: true, //previene warnings
     useUnifiedTopology: true, //previene warnings
   })
-  .then(() =>
-    app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
-  )
-  .catch(error => console.log(error));
+  .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
+  .catch((error) => console.log(error));
 
 mongoose.set('useFindAndModify', false); //previene warnings

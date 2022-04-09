@@ -1,13 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import {
-  Avatar,
-  Button,
-  Paper,
-  Grid,
-  Typography,
-  Container,
-} from '@material-ui/core';
+import React, { useState } from 'react';import { useNavigate } from 'react-router-dom';
+import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
 import { GoogleLogin } from 'react-google-login';
 import useStyles from './styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -33,7 +25,7 @@ const Auth = () => {
   const [isSignup, setIsSignup] = useState(false);
   const [formData, setFormData] = useState(inicialState);
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     if (isSignup) {
       dispatch(signUp(formData, navigate));
@@ -41,7 +33,7 @@ const Auth = () => {
       dispatch(signIn(formData, navigate));
     }
   };
-  const handleChange = e => {
+  const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const handleShowPassword = () => {
@@ -52,7 +44,7 @@ const Auth = () => {
     setShowPassword(false);
   };
 
-  const googleSuccess = async response => {
+  const googleSuccess = async (response) => {
     const result = response?.profileObj;
     const token = response?.tokenId;
     try {
@@ -62,7 +54,7 @@ const Auth = () => {
       console.log(error);
     }
   };
-  const googleFailure = async error => {
+  const googleFailure = async (error) => {
     console.log(error);
     console.log('Google login failed');
   };
@@ -75,31 +67,15 @@ const Auth = () => {
         </Avatar>
         <Typography variant='h5'>{isSignup ? 'Sign Up' : 'Sign In'}</Typography>
 
-        <form className={classes.form} onSubmit={event => handleSubmit(event)}>
+        <form className={classes.form} onSubmit={(event) => handleSubmit(event)}>
           <Grid container spacing={2}>
             {isSignup && (
               <>
-                <Input
-                  name='firstName'
-                  label='First Name'
-                  handleChange={handleChange}
-                  autoFocus
-                  half
-                />
-                <Input
-                  name='lastName'
-                  label='Last Name'
-                  handleChange={handleChange}
-                  half
-                />
+                <Input name='firstName' label='First Name' handleChange={handleChange} autoFocus half />
+                <Input name='lastName' label='Last Name' handleChange={handleChange} half />
               </>
             )}
-            <Input
-              name='email'
-              label='Email Adress'
-              handleChange={handleChange}
-              type='email'
-            />
+            <Input name='email' label='Email Adress' handleChange={handleChange} type='email' />
             <Input
               name='password'
               label='Password'
@@ -117,18 +93,12 @@ const Auth = () => {
               />
             )}
           </Grid>
-          <Button
-            type='submit'
-            fullWidth
-            variant='contained'
-            color='primary'
-            className={classes.submit}
-          >
+          <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>
             {isSignup ? 'Sign Up' : 'Sign In'}
           </Button>
           <GoogleLogin
             clientId='393920114534-3gm41lg82g23fgeam8ek6qgnrplpcp7m.apps.googleusercontent.com'
-            render={renderProps => (
+            render={(renderProps) => (
               <Button
                 className={classes.googleButton}
                 color='primary'
@@ -136,8 +106,7 @@ const Auth = () => {
                 onClick={renderProps.onClick}
                 disabled={renderProps.disabled}
                 variant='contained'
-                startIcon={<Icon />}
-              >
+                startIcon={<Icon />}>
                 Google Sign In
               </Button>
             )}
@@ -147,11 +116,7 @@ const Auth = () => {
           />
           <Grid container justifyContent='flex-end'>
             <Grid item>
-              <Button onClick={switchMode}>
-                {isSignup
-                  ? 'Already have an account? Sign in'
-                  : "Don't have an account? Sign up"}
-              </Button>
+              <Button onClick={switchMode}>{isSignup ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}</Button>
             </Grid>
           </Grid>
         </form>

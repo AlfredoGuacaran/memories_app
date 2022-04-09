@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import useStyles from './styles';
+import React, { useState, useEffect } from 'react';import useStyles from './styles';
 import FileBase from 'react-file-base64';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
@@ -17,21 +16,17 @@ export default function Form({ currentId, setCurrentId }) {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem('profile'));
 
-  const post = useSelector(state =>
-    currentId ? state.posts.find(message => message._id === currentId) : null
-  );
+  const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
 
   useEffect(() => {
     if (post) setPostData(post);
   }, [post]);
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (currentId) {
-      dispatch(
-        updatePost(currentId, { ...postData, name: user?.result?.name })
-      );
+      dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
     } else {
       dispatch(createPost({ ...postData, name: user?.result?.name }));
     }
@@ -60,15 +55,8 @@ export default function Form({ currentId, setCurrentId }) {
 
   return (
     <Paper className={classes.paper}>
-      <form
-        autoComplete='off'
-        noValidate
-        className={`${classes.root} ${classes.form}`}
-        onSubmit={handleSubmit}
-      >
-        <Typography variant='h6'>
-          {currentId ? 'Editing' : 'Creating'} a Memory
-        </Typography>
+      <form autoComplete='off' noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
+        <Typography variant='h6'>{currentId ? 'Editing' : 'Creating'} a Memory</Typography>
 
         <TextField
           name='title'
@@ -76,7 +64,7 @@ export default function Form({ currentId, setCurrentId }) {
           label='Title'
           fullWidth
           value={postData.title}
-          onChange={e => setPostData({ ...postData, title: e.target.value })}
+          onChange={(e) => setPostData({ ...postData, title: e.target.value })}
         />
 
         <TextField
@@ -85,7 +73,7 @@ export default function Form({ currentId, setCurrentId }) {
           label='Message'
           fullWidth
           value={postData.message}
-          onChange={e => setPostData({ ...postData, message: e.target.value })}
+          onChange={(e) => setPostData({ ...postData, message: e.target.value })}
         />
         <TextField
           name='tags'
@@ -93,37 +81,16 @@ export default function Form({ currentId, setCurrentId }) {
           label='Tags'
           fullWidth
           value={postData.tags}
-          onChange={e =>
-            setPostData({ ...postData, tags: e.target.value.split(',') })
-          }
+          onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })}
         />
         <div className={classes.fileInput}>
-          <FileBase
-            type='file'
-            multiple={false}
-            onDone={({ base64 }) =>
-              setPostData({ ...postData, selectedFile: base64 })
-            }
-          />
+          <FileBase type='file' multiple={false} onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })} />
         </div>
 
-        <Button
-          className={classes.buttonSubmit}
-          variant='contained'
-          color='primary'
-          size='large'
-          type='submit'
-          fullWidth
-        >
+        <Button className={classes.buttonSubmit} variant='contained' color='primary' size='large' type='submit' fullWidth>
           Submit
         </Button>
-        <Button
-          variant='contained'
-          color='secondary'
-          size='small'
-          onClick={clear}
-          fullWidth
-        >
+        <Button variant='contained' color='secondary' size='small' onClick={clear} fullWidth>
           Clear
         </Button>
       </form>

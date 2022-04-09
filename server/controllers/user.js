@@ -1,5 +1,4 @@
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';import jwt from 'jsonwebtoken';
 import User from '../models/user.js';
 
 export const signin = async (req, res) => {
@@ -7,16 +6,11 @@ export const signin = async (req, res) => {
     const { email, password } = req.body;
     const existingUser = await User.findOne({ email });
 
-    if (!existingUser)
-      return res.status(404).json({ message: 'User does not exist' });
+    if (!existingUser) return res.status(404).json({ message: 'User does not exist' });
 
-    const isPasswordCorrect = await bcrypt.compare(
-      password,
-      existingUser.password
-    );
+    const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
 
-    if (!isPasswordCorrect)
-      return res.status(400).json({ message: 'Password is incorrect' });
+    if (!isPasswordCorrect) return res.status(400).json({ message: 'Password is incorrect' });
 
     const token = jwt.sign({ id: existingUser._id }, 'test', {
       expiresIn: '1h',
@@ -34,11 +28,9 @@ export const signup = async (req, res) => {
 
     const existingUser = await User.findOne({ email });
 
-    if (existingUser)
-      return res.status(400).json({ message: 'User already exists' });
+    if (existingUser) return res.status(400).json({ message: 'User already exists' });
 
-    if (password !== passwordConfirm)
-      return res.status(400).json({ message: 'Passwords dont match' });
+    if (password !== passwordConfirm) return res.status(400).json({ message: 'Passwords dont match' });
 
     const hashedPassword = await bcrypt.hash(password, 12);
 

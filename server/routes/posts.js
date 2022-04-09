@@ -1,11 +1,4 @@
-import express from 'express';
-import {
-  getPosts,
-  createPost,
-  updatePost,
-  deletePost,
-  likePost,
-} from '../controllers/posts.js';
+import express from 'express';import { getPosts, createPost, updatePost, deletePost, likePost } from '../controllers/posts.js';
 
 import auth from '../middleware/auth.js';
 
