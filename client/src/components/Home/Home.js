@@ -28,11 +28,11 @@ export const Home = () => {
   return (
     <Grow in>
       <Container maxWidth='xl'>
-        <Grid className={classes.gridContainer} container justifyContent='space-between' alignItems='stretch' spacing={4}>
-          <Grid item xs={12} sm={6} md={9}>
+        <Grid className={classes.gridContainer} container justifyContent='space-between' alignItems='stretch' spacing={3}>
+          <Grid item xs={12} sm={12} md={9}>
             <Posts setCurrentId={setCurrentId} />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={8} md={3}>
             <AppBar className={classes.appBarSearch} position='static' color='inherit'>
               <TextField name='search' variant='outlined' label='Search Memories' fullWidth value='TEST' onChange={() => {}} />
             </AppBar>
