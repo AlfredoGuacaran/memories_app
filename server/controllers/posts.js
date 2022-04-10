@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';import PostMessage from '../models/postMessage.js';
-
 export const getPosts = async (req, res) => {
   try {
     const postMessages = await PostMessage.find();
@@ -84,5 +83,17 @@ export const likePost = async (req, res) => {
     res.status(200).json(updatedPost);
   } catch (error) {
     res.status(404).json({ message: error });
+  }
+};
+
+export const getPostsBySearch = async (req, res) => {
+  const { searchQuery, tags } = req.query;
+  try {
+    const title = new RegExp(searchQuery, 'i');
+    const posts = await PostMessage.find({ $or: [{ title }, { tags: { $in: tags.split(',') } }] });
+
+    res.status(200).json({ data: posts });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
   }
 };
