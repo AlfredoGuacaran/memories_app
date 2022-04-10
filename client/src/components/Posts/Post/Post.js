@@ -1,4 +1,5 @@
-import React from 'react';import useStyles from './styles';
+import React from 'react';
+import useStyles from './styles';
 import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
@@ -39,7 +40,7 @@ export default function Post({ post, setCurrentId }) {
   };
 
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} reised elevation={6}>
       <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
       <div className={classes.overlay}>
         <Typography variant='h6'>{post.name}</Typography>
