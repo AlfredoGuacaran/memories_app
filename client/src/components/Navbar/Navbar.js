@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
 import memoriesLogo from '../../images/memories-Logo.png';
 import memoriesText from '../../images/memories-Text.png';
 
@@ -19,9 +20,8 @@ const Navbar = () => {
     window.location.reload();
   };
 
+  const token = user?.token;
   useEffect(() => {
-    const token = user?.token;
-
     if (token) {
       const decodedToken = decode(token);
       if (decodedToken.exp * 1000 < new Date().getTime()) return logout();
