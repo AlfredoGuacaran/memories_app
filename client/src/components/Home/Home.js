@@ -28,12 +28,13 @@ export const Home = () => {
   const searchPost = () => {
     if (search.trim() || tags) {
       //dispatch searching
-      dispatch(getPostsBySearch({ search: 'none', tags: tags.join(',') }));
+      dispatch(getPostsBySearch({ search: search, tags: tags.join(',') }));
       navigate(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`);
     } else {
       navigate('/');
     }
   };
+
   const handleKeyPress = (e) => {
     if (e.keyCode === 13) {
       searchPost();

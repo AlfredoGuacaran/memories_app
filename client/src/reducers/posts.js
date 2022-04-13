@@ -8,9 +8,10 @@ export default (state = { isLoading: true, posts: [] }, action) => {
     case FETCH_ALL:
       return { ...state, posts: action.payload.data, currentPage: action.payload.currentPage, numberOfPages: action.payload.numberOfPages };
     case FETCH_BY_SEARCH:
-      return { ...state, posts: action.payload };
+      console.log(state.posts);
+      return { ...state, posts: action.payload.data };
     case FETCH_POST:
-      return { ...state, post: action.payload };
+      return { ...state, post: action.payload.data };
     case DELETE:
       return { ...state, posts: state.posts.filter((post) => post._id !== action.payload) };
     case UPDATE:
