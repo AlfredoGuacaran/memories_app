@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { Paper, Typography, CircularProgress, Divider } from '@material-ui/core';
+import React, { useEffect } from 'react';import { Paper, Typography, CircularProgress, Divider } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -19,19 +18,19 @@ const PostDetail = () => {
 
   useEffect(() => {
     async function fetchPost() {
-      await dispatch(getPost(id));
+      dispatch(getPost(id));
     }
     fetchPost();
-  }, [id]);
+  }, [dispatch, id]);
 
   useEffect(() => {
     async function fetchPost() {
       if (post) {
-        await dispatch(getPostsBySearch({ search: 'none', tags: post?.tags.join(',') }));
+        dispatch(getPostsBySearch({ search: 'none', tags: post?.tags.join(',') }));
       }
     }
     fetchPost();
-  }, [post]);
+  }, [dispatch, post]);
 
   if (!post) return null;
   if (isLoading) {
@@ -87,7 +86,7 @@ const PostDetail = () => {
                 <Typography gutterBottom variant='subtitle1'>
                   Likes: {likes.length}
                 </Typography>
-                <img src={selectedFile} width='150px'></img>
+                <img src={selectedFile} width='150px' alt='postimg'></img>
               </div>
             ))}
           </div>

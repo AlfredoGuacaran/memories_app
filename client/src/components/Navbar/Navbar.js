@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
 import memoriesLogo from '../../images/memories-Logo.png';
 import memoriesText from '../../images/memories-Text.png';
 
@@ -16,19 +15,24 @@ const Navbar = () => {
 
   const logout = () => {
     dispatch({ type: 'LOGOUT' });
-    setUser(undefined);
+    setUser(null);
     window.location.reload();
   };
 
   const token = user?.token;
+
   useEffect(() => {
     if (token) {
       const decodedToken = decode(token);
-      if (decodedToken.exp * 1000 < new Date().getTime()) return logout();
+      if (decodedToken.exp * 1000 < new Date().getTime()) {
+        dispatch({ type: 'LOGOUT' });
+        setUser(null);
+        window.location.reload();
+      }
     }
 
     setUser(JSON.parse(localStorage.getItem('profile')));
-  }, [location]);
+  }, [location, token, dispatch]);
 
   return (
     <AppBar className={classes.appBar} position='static' color='inherit'>

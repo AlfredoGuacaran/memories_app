@@ -13,10 +13,10 @@ const Paginate = ({ page }) => {
 
   useEffect(() => {
     async function fetchPosts() {
-      return await dispatch(getPosts(page));
+      dispatch(getPosts(page));
     }
     if (page) fetchPosts();
-  }, [page]);
+  }, [dispatch, page]);
 
   return (
     <Pagination
