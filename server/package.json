@@ -7,6 +7,14 @@
   "scripts": {
     "start": "node index.js"
   },
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs.git"
+    }
+  ],
+  "engines": {
+    "node": "16.x"
+  },
   "keywords": [],
   "author": "Alfredo Guacaran",
   "license": "ISC",
