@@ -54,8 +54,8 @@ export default function Post({ post, setCurrentId }) {
     );
   };
 
-  const openPost = () => {
-    navigate(`/posts/${post._id}`);
+  const openPost = (e) => {
+    if (!e.target.closest('button')) navigate(`/posts/${post._id}`);
   };
 
   return (
@@ -68,7 +68,7 @@ export default function Post({ post, setCurrentId }) {
         </div>
         <div className={classes.overlay2}>
           {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
-            <Button style={{ color: 'white' }} size='small' onClick={() => setCurrentId(post._id)}>
+            <Button name='btnEdit' style={{ color: 'white' }} size='small' onClick={() => setCurrentId(post._id)}>
               <MoreHorizIcon fontSize='medium' />
             </Button>
           )}

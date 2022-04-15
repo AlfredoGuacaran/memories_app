@@ -28,8 +28,10 @@ export const Home = () => {
   const searchPost = () => {
     if (search.trim() || tags) {
       //dispatch searching
-      dispatch(getPostsBySearch({ search: search, tags: tags.join(',') }));
-      navigate(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`);
+      if (search.length || tags.length) {
+        dispatch(getPostsBySearch({ search: search, tags: tags.join(',') }));
+        navigate(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`);
+      }
     } else {
       navigate('/');
     }
@@ -52,15 +54,7 @@ export const Home = () => {
           </Grid>
           <Grid item xs={12} sm={8} md={4}>
             <AppBar className={classes.appBarSearch} position='static' color='inherit'>
-              <TextField
-                name='search'
-                variant='outlined'
-                label='Search Memories'
-                fullWidth
-                value={search}
-                onKeyPress={handleKeyPress}
-                onChange={(e) => setSearch(e.target.value)}
-              />
+              <TextField name='search' variant='outlined' label='Search Memories' fullWidth value={search} onKeyPress={handleKeyPress} onChange={(e) => setSearch(e.target.value)} />
               <ChipInput style={{ margin: '10px 0' }} value={tags} label='Search Tags' variant='outlined' onAdd={handleAddTag} onDelete={handleDeleteTag} />
               <Button onClick={searchPost} className={classes.searchButton} color='primary' variant='contained'>
                 Search
