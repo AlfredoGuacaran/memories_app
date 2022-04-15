@@ -1,4 +1,5 @@
-import { makeStyles } from '@material-ui/core/styles';export default makeStyles((theme) => ({
+import { makeStyles } from '@material-ui/core/styles';
+export default makeStyles((theme) => ({
   media: {
     borderRadius: '20px',
     objectFit: 'cover',
@@ -37,5 +38,15 @@ import { makeStyles } from '@material-ui/core/styles';export default makeStyles(
     padding: '20px',
     borderRadius: '15px',
     height: '39vh',
+  },
+  commentsOuterContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+  },
+  commentsInnerContainer: {
+    height: '200px',
+    overflowY: 'auto',
+    marginRight: '30px',
   },
 }));
