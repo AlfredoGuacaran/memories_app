@@ -1,0 +1,8 @@
+memories_app/
+├─ netlify.toml
+├─ client/
+│  └─ package.json
+│  
+└─ server/
+   └─ package.json
+   
